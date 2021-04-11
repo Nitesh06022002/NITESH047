@@ -14,14 +14,17 @@
 		 var matrix=[[2,2,2],[2,2,2],[2,2,2]];
 		 var win = 2;
 		 var c = 0;
+		 var score1 = 0;
+		 var score2 = 0;
+		 var score3 = 0;
          		 
-	     function Input(term,r,c){
+	     function Input(term,r,c)
+		 {
 		    if(term.innerHTML != ""){
 			return;
 			}
-			if(win != 2){
-			return;
-			}
+			if((score1 + score2 + score3) == 3)
+			{return;}			
 			c = c + 1;
 			matrix[r][c] = move;
 		    if(move == 0)
@@ -54,15 +57,28 @@
 			if(win != 2)
 			{
 			if(win == 0)
-			{document.getElementById("printer").innerHTML = "Player 1 Has Won";
-			}
+			{document.getElementById("result").innerHTML = "Player 1 Has Won";
+			document.getElementById("moves").innerHTML = "Number of Moves"+c;
+			score1 = score1 + 1;}
 			else if(win == 1)
 			{
-			document.getElementById("printer").innerHTML = "Player 2 Has Won";}
+			document.getElementById("result").innerHTML = "Player 2 Has Won";
+			document.getElementById("moves").innerHTML = "Number of Moves"+c;
+			score2 = score2 + 1;}
 			}
 			if(c == 9 && win == 2)
 			{
-			document.getElementById("printer").innerHTML = "Match Is Drawn";
+			document.getElementById("result").innerHTML = "Match Is Drawn";
+			document.getElementById("moves").innerHTML = "Number of Moves"+c;
+			score3 = score3 + 1;
+			}
+			if(score1 > score2)
+			{
+			document.getElementById("score").innerHTML = "Player 1"+" "+score1;
+			}
+			else if(score2 > score1)
+			{
+			document.getElementById("score").innerHTML = "Player 2"+" "+score2;
 			}
 			}
 			
@@ -101,6 +117,27 @@
 		text-align: center;
 		cursor: pointer;
 		}
+		.result {
+		height: 50px;
+		text-align: center;
+		color: green;
+		font-size: 30px;
+		font-size: bolder;
+		}
+		.moves {
+		height: 35px;
+		text-align: center;
+		color: white;
+		font-size: 30px;
+		font-size: bolder;
+		}
+		.score {
+		height: 65px;
+		text-align: center;
+		color: white;
+		font-size: 30px;
+		font-size: bolder;
+		}
 		
     </style>
 		
@@ -123,5 +160,8 @@
 	 </div>
 	</div>
     <div class="printer" id="printer"> TOSS </div>
+	<div class="result" id="result"></div>
+	<div class="moves" id="moves"></div>
+	<div class="score" id="score"></div>
 </body>
 </html>	
